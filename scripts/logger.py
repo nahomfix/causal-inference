@@ -3,10 +3,14 @@ from pathlib import Path
 
 
 class Logger:
+    """
+    Class for logging
+    """
+
     def __init__(self, filename: str, level=logging.INFO):
         """Initilize logger class with file name to be written and default log level.
 
-        Parameters
+        Parameters:
         ---
             filename: str
                 any string name for the file without its extension
@@ -41,7 +45,7 @@ class Logger:
     def get_app_logger(self) -> logging.Logger:
         """Return the logger object.
 
-        Returns
+        Returns:
         ---
             logging.Logger: logger object
         """
