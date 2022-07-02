@@ -8,7 +8,10 @@ from sklearn.metrics import (
     accuracy_score,
     classification_report,
     confusion_matrix,
+    f1_score,
     plot_confusion_matrix,
+    precision_score,
+    recall_score,
 )
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -16,7 +19,7 @@ from sklearn.preprocessing import StandardScaler
 from logger import Logger
 
 # enable autologging
-mlflow.sklearn.autolog()
+# mlflow.sklearn.autolog()
 
 
 def split_dataset(X: pd.DataFrame, y: pd.DataFrame, test_size: int) -> list:
@@ -56,8 +59,6 @@ if __name__ == "__main__":
             logreg_clf, X_test, y_test, prefix="validation_"
         )
 
-        # mlflow.sklearn.log_model(logreg_clf, "logistic-model")
-
         logger.info("Trained model successfully!")
 
         logger.info(
@@ -67,8 +68,20 @@ if __name__ == "__main__":
         y_pred = logreg_clf.predict(X_test)
 
         accuracy = accuracy_score(y_true=y_test, y_pred=y_pred)
+        precision = precision_score(
+            y_true=y_test, y_pred=y_pred, average="weighted"
+        )
+        recall = recall_score(y_true=y_test, y_pred=y_pred, average="weighted")
+        f1 = f1_score(y_true=y_test, y_pred=y_pred, average="weighted")
 
         clf_report = classification_report(y_true=y_test, y_pred=y_pred)
+
+        mlflow.log_metric("accuracy", accuracy)
+        mlflow.log_metric("precision", precision)
+        mlflow.log_metric("recall", recall)
+        mlflow.log_metric("f1", f1)
+
+        mlflow.sklearn.log_model(logreg_clf, "logistic-model")
 
         plot_confusion_matrix(
             logreg_clf, X_test, y_test, normalize="true", cmap=plt.cm.Blues
