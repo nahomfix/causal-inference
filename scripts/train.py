@@ -23,7 +23,7 @@ def split_dataset(X: pd.DataFrame, y: pd.DataFrame, test_size: int) -> list:
 
 
 if __name__ == "__main__":
-    root_dir = Path().cwd()
+    root_dir = Path().cwd().parent
     data_dir = root_dir / "data"
     metrics_dir = root_dir / "metrics"
 
