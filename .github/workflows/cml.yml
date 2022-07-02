@@ -1,0 +1,30 @@
+name: train-clf-model
+on: [push]
+
+# on:
+#     push:
+#         branches: [main]
+#     pull_request:
+#         branches: [main]
+
+jobs:
+    train-model:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+            - uses: iterative/setup-cml@v1
+            - uses: actions/setup-python@v2
+              with:
+                  python-version: "3.x"
+            - name: Train model
+              env:
+                  repo_token: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  pip3 install -r requirements.txt
+                  python scripts/train.py
+
+                  # Create CML report
+                  cat metrics/metrics.txt >> report.md
+                  cml publish metrics/metrics_plot.png --md --title 'Confusion Matrix' >> report.md
+                  cml send-comment report.md
