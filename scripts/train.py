@@ -23,11 +23,11 @@ def split_dataset(X: pd.DataFrame, y: pd.DataFrame, test_size: int) -> list:
 
 
 if __name__ == "__main__":
-    root_dir = Path().cwd().parent
+    root_dir = Path().cwd()
     data_dir = root_dir / "data"
     metrics_dir = root_dir / "metrics"
 
-    clean_df = pd.read_csv(data_dir / "data_clean.csv")
+    clean_df = pd.read_csv(data_dir / "data_clean_cml.csv")
 
     standard_scaler = StandardScaler()
 
