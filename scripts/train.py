@@ -55,9 +55,9 @@ if __name__ == "__main__":
     with mlflow.start_run():
         logreg_clf.fit(X_train, y_train)
 
-        metrics = mlflow.sklearn.eval_and_log_metrics(
-            logreg_clf, X_test, y_test, prefix="validation_"
-        )
+        # metrics = mlflow.sklearn.eval_and_log_metrics(
+        #     logreg_clf, X_test, y_test, prefix="validation_"
+        # )
 
         logger.info("Trained model successfully!")
 
@@ -81,7 +81,7 @@ if __name__ == "__main__":
         mlflow.log_metric("recall", recall)
         mlflow.log_metric("f1", f1)
 
-        # mlflow.sklearn.log_model(logreg_clf, "logistic-model")
+        mlflow.sklearn.log_model(logreg_clf, "logistic-model")
 
         plot_confusion_matrix(
             logreg_clf, X_test, y_test, normalize="true", cmap=plt.cm.Blues
