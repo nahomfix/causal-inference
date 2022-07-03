@@ -27,4 +27,5 @@ jobs:
                   # Create CML report
                   cat metrics/metrics.txt >> report.md
                   cml publish metrics/metrics_plot.png --md --title 'Confusion Matrix' >> report.md
+                  cml publish metrics/metrics_plot_selected.png --md --title 'Confusion Matrix of selected features' >> report.md
                   cml send-comment report.md

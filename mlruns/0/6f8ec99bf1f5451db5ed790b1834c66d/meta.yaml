@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/user/Desktop/10_Academy/Week_8/causal-inference/mlruns/0/6f8ec99bf1f5451db5ed790b1834c66d/artifacts
+end_time: 1656850365748
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+name: ''
+run_id: 6f8ec99bf1f5451db5ed790b1834c66d
+run_uuid: 6f8ec99bf1f5451db5ed790b1834c66d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1656850364871
+status: 3
+tags: []
+user_id: user
